@@ -31,10 +31,12 @@ public class ChessTest {
             opcion=pedirOpcionMenu();
             ejecutarComando(opcion);
         } while (opcion!=opcionSalir);
-        K.preguntar("\n- Finalizando programa. Pulse INTRO para salir.");
+        K.escribir("\n- Finalizando programa. ");
+        pausar();
         return;
     }
     public void presentarMenu() {
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("ChessTest - colección de problemas de ajedrez\n");
         K.escribir("Seleccione opción (letra resaltada, "+opcionSalir+" fin)\n");
@@ -90,11 +92,15 @@ public class ChessTest {
         return;
     }
     public void salvarEjercicios() {
-        K.escribir("- salvando ejercicios\n");
+        limpiarPantalla();
+        K.escribir("---------------------------------------------\n");
+        K.escribir("Esta funcionalidad será implementada próximamente.\n");
+        pausar();
         return;
     }
     public void visualizarEjercicio() {
         String clave;
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("visualizar ejercicio existente:\n");
         if (ejercicios.isEmpty())
@@ -106,11 +112,12 @@ public class ChessTest {
             else
                 K.escribir("Clave de ejercicio no encontrada.\n");
         }
-        K.preguntar("Pulse INTRO para continuar...");
+        pausar();
         return;
     }
     public void generarEjercicio() {
         String clave;
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("generar nuevo ejercicio:\n");
         clave=K.preguntar("Introduzca clave del ejercicio a generar");
@@ -127,14 +134,38 @@ public class ChessTest {
                 K.escribir("Actualmente hay "+ejercicios.size()+" ejercicios.\n");
             }
         }
+        pausar();
         return;
     }
     public void actualizarEjercicio() {
-        K.escribir("- actualizando ejercicio\n");
+        String clave;
+        Ejercicio ejercicio;
+        limpiarPantalla();
+        K.escribir("---------------------------------------------\n");
+        K.escribir("actualizando ejercicio existente:\n");
+        if (ejercicios.isEmpty())
+            K.escribir("Actualmente no hay ejercicios cargados.\n");
+        else {
+            clave=K.preguntar("Introduzca la clave del ejercicio");
+            if (ejercicios.containsKey(clave)) {
+                ejercicio=ejercicios.get(clave);
+                K.escribir("Comentario actual: "+ejercicio.getComentario()+"\n");
+                K.escribir("Código FEN actual: "+ejercicio.getCodigoFen()+"\n");
+                K.escribir("Objetivo actual: "+ejercicio.getObjetivo()+"\n");
+                K.escribir("Solución actual: "+ejercicio.getSolucion()+"\n");
+                K.escribir("Número actual de movimientos: "+ejercicio.getCuantosMovimientos()+"\n");
+                K.escribir("Turno actual de juego: "+ejercicio.getEsTurnoBlancas()+"\n");
+                pedirDatosEjercicio(ejercicio);
+                K.escribir("Ejercicio de clave \'"+clave+"\' actualizado.\n");
+            } else
+                K.escribir("Clave de ejercicio no encontrada.\n");
+        }
+        pausar();
         return;
     }
     public void eliminarEjercicio() {
         String clave;
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("eliminar ejercicio existente:\n");
         if (ejercicios.isEmpty())
@@ -147,10 +178,12 @@ public class ChessTest {
             } else
                 K.escribir("Clave de ejercicio no encontrada.\n");
         }
+        pausar();
         return;
     }
     public void listarEjercicios() {
         Object clave;
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("listado de claves de ejercicios presentes:\n");
         if (ejercicios.isEmpty())
@@ -163,6 +196,7 @@ public class ChessTest {
             }
             K.escribir("Hay " + ejercicios.size() + " ejercicios.\n");
         }
+        pausar();
         return;
     }
     public Object siguienteClave(Object obj) {
@@ -170,6 +204,7 @@ public class ChessTest {
     }
     public void mostrarEjercicioEnPantalla(String clave) {
         Ejercicio ejercicio=ejercicios.get(clave);
+        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("mostrando ejercicio de clave \'"+clave+"\':\n");
         K.escribir(ejercicio.getComentario()+"\n");
@@ -182,6 +217,23 @@ public class ChessTest {
         return;
     }
     public void pedirDatosEjercicio(Ejercicio ejercicio) {
+        limpiarPantalla();
+        K.escribir("---------------------------------------------\n");
+        K.escribir("introduzca los nuevos datos del ejercicio:\n");
+        ejercicio.setComentario(K.preguntar("Introduzca el comentario"));
+        ejercicio.setCodigoFen(K.preguntar("Introduzca el código FEN"));
+        ejercicio.setObjetivo(K.preguntar("Introduzca el objetivo"));
+        ejercicio.setSolucion(K.preguntar("Introduzca la solución"));
+        ejercicio.setCuantosMovimientos((int) K.preguntarLong("Introduzca el número de movimientos", 0));
+        ejercicio.setEsTurnoBlancas(K.preguntarChar("¿Es turno de las blancas?", "sn")=='s');
+        return;
+    }
+    public void limpiarPantalla() {
+        K.escribir("\n".repeat(40));
+        return;
+    }
+    public void pausar() {
+        K.preguntar("- Pulse INTRO para continuar...");
         return;
     }
 }
