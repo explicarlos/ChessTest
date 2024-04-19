@@ -71,7 +71,9 @@ public class ChessTest {
         return;
     }
     public void cargarEjercicios() {
-        K.escribir("- cargando ejercicios\n");
+        limpiarPantalla();
+        K.escribir("---------------------------------------------\n");
+        K.escribir("Cargando ejercicios en memoria...\n");
         ejercicios.clear();
         ejercicios.put("200", new Ejercicio("Kasparov-Kuijpers (Dortmund, 1980)", "r5k1/1pn1q2p/p2Nbr2/2p2pNQ/P1Bn4/8/1P4PP/4RRK1 w - - 0 1", "juegan y ganan", "Nxf5", 1, true));
         ejercicios.put("199", new Ejercicio("C. lópez - Guedes (Cuba, 1997)", "r1bqr1k1/1p1n1pb1/p1p1p2p/2PpP1p1/1P1P4/2N1P1B1/P1Q1B1PP/3R1RK1 w - - 0 1", "juegan y ganan", "Rxf7", 1, true));
@@ -89,6 +91,7 @@ public class ChessTest {
         ejercicios.put("m1.1", new Ejercicio("anónimo", "6r1/2Q2P2/5k2/5P2/5K2/8/8/8 w - - 0 1", "juegan ydan mate en 1", "fxc8=N#", 1, true));
         ejercicios.put("m2.2", new Ejercicio("Adolf Anderssen - Lionel Kieseritzky (Londres, 1851)", "r1bk2nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1 w - - 0 1", "juegan y dan mate en 2", "Qf6+ Nxf6, Be7#", 1, true));
         K.escribir("Cargados "+ejercicios.size()+" ejercicios de ajedrez.\n");
+        pausar();
         return;
     }
     public void salvarEjercicios() {
@@ -217,7 +220,6 @@ public class ChessTest {
         return;
     }
     public void pedirDatosEjercicio(Ejercicio ejercicio) {
-        limpiarPantalla();
         K.escribir("---------------------------------------------\n");
         K.escribir("introduzca los nuevos datos del ejercicio:\n");
         ejercicio.setComentario(K.preguntar("Introduzca el comentario"));
