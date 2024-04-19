@@ -21,6 +21,7 @@ public final class K {
 		} catch (Exception exc) {
 			entrada="";
 		}
+		entrada=entrada.replace("\r", "");
 		return entrada;
 	}
 	static String preguntar(String pregunta) {
@@ -189,9 +190,12 @@ public final class K {
 		return;
 	}
 	static void ejecutarPrograma() {
-		double n;
-		n=preguntarDouble("Un número", 10);
-		escribir("Has introducido "+n+"\n");
+		long n;
+		double x;
+		n=preguntarLong("Un número >=10", 10);
+		x=preguntarDouble("Un número >=10", 10);
+		char car=preguntarChar("Pulsa a 7 b", "a7b");
+		escribir("Has introducido "+n+" y "+x+" y el carácter \'"+car+"\'\n");
 		return;
 	}
 // necesario para conmutar main	*/

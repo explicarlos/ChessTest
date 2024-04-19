@@ -1,5 +1,5 @@
 // ChessTest: aplicación para mantener archivo de problemas de ajedrez
-// versión: 20240416
+// versión: 20240419
 // autor: Carlos grasa lambea
 
 import java.util.SortedMap;
